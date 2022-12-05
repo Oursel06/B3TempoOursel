@@ -13,4 +13,8 @@ public interface IEdfApi {
     @GET("services/rest/referentiel/getNbTempoDays")
     Call<TempoDaysLeft> getTempoDaysLeft(@Query("TypeAlerte") String alertType);
 
+    @GET("services/rest/referentiel/searchTempoStore")
+    Call<TempoDaysColor> getTempoDaysColor(
+            @Query("dateRelevant") String dateBegin,
+            @Query("TypeAlerte") String alertType);
 }
