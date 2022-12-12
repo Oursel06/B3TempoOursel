@@ -7,24 +7,24 @@ public class TempoDaysColor {
 
     @SerializedName("couleurJourJ")
     @Expose
-    private String couleurJourJ;
+    private TempoColor couleurJourJ;
     @SerializedName("couleurJourJ1")
     @Expose
-    private String couleurJourJ1;
+    private TempoColor couleurJourJ1;
 
-    public String getCouleurJourJ() {
+    public TempoColor getCouleurJourJ() {
         return couleurJourJ;
     }
 
-    public void setCouleurJourJ(String couleurJourJ) {
+    public void setCouleurJourJ(TempoColor couleurJourJ) {
         this.couleurJourJ = couleurJourJ;
     }
 
-    public String getCouleurJourJ1() {
+    public TempoColor getCouleurJourJ1() {
         return couleurJourJ1;
     }
 
-    public void setCouleurJourJ1(String couleurJourJ1) {
+    public void setCouleurJourJ1(TempoColor couleurJourJ1) {
         this.couleurJourJ1 = couleurJourJ1;
     }
 

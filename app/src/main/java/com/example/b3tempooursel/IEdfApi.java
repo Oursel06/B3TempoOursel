@@ -13,8 +13,11 @@ public interface IEdfApi {
     @GET("services/rest/referentiel/getNbTempoDays")
     Call<TempoDaysLeft> getTempoDaysLeft(@Query("TypeAlerte") String alertType);
 
+    // https://particulier.edf.fr/services/rest/referentiel/searchTempoStore?dateRelevant=2022-12-05&TypeAlerte=TEMPO
+
     @GET("services/rest/referentiel/searchTempoStore")
     Call<TempoDaysColor> getTempoDaysColor(
             @Query("dateRelevant") String dateBegin,
-            @Query("TypeAlerte") String alertType);
+            @Query("TypeAlerte") String alertType
+    );
 }
