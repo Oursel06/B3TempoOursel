@@ -1,7 +1,10 @@
 package com.example.b3tempooursel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,13 +17,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     TextView red_days_tv, blue_days_tv, white_days_tv;
-    IEdfApi apiInterface;
+    public static IEdfApi apiInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button history = findViewById(R.id.history_bt);
+        history.setOnClickListener(this);
         apiInterface = ApiClient.get().create(IEdfApi.class);
         Call<TempoDaysLeft> call = apiInterface.getTempoDaysLeft(IEdfApi.EDF_TEMPO_API_ALERT_TYPE);
         call.enqueue(new Callback<TempoDaysLeft>() {
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView red_days_tv_txt = findViewById(R.id.red_days_tv);
                 TempoDaysLeft resource = response.body();
                 if(response.code() == HttpURLConnection.HTTP_OK && resource != null) {
-//                    responseText.setText(resource.getParamNbJBlanc().toString());
                     Log.d("REPONSE", "getParamNbJBleu : " + resource.getParamNbJBleu());
                     Log.d("REPONSE", "getParamNbJBlanc : " + resource.getParamNbJBlanc());
                     Log.d("REPONSE", "getParamNbJRouge : " + resource.getParamNbJRouge());
@@ -61,8 +65,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<TempoDaysColor> call, Throwable t) {
                 Log.e("REPONSE", "ERREUR ");
-
             }
         });
     }
-}
+//    public void showHistory(View view){
+//        Intent intent = new Intent();
+//        intent.setClass(this, HistoryActivity.class);
+//        startActivity(intent);
+//    }
+
+    @Override
+    public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(this, HistoryActivity.class);
+            startActivity(intent);
+        }
+    }

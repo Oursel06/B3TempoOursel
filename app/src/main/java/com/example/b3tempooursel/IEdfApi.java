@@ -17,7 +17,15 @@ public interface IEdfApi {
 
     @GET("services/rest/referentiel/searchTempoStore")
     Call<TempoDaysColor> getTempoDaysColor(
-            @Query("dateRelevant") String dateBegin,
+            @Query("dateRelevant") String dateRelevant,
             @Query("TypeAlerte") String alertType
+    );
+
+//    https://particulier.edf.fr/services/rest/referentiel/historicTEMPOStore?dateBegin=2021&dateEnd=2022
+
+    @GET("services/rest/referentiel/historicTEMPOStore")
+    Call<TempoHistory> getTempoHistory(
+            @Query("dateBegin") String dateBegin,
+            @Query("dateEnd") String dateEnd
     );
 }
