@@ -27,6 +27,8 @@ class TempoDateAdapter extends RecyclerView.Adapter<TempoDateAdapter.TempoDateVi
     public TempoDateViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_history, viewGroup, false);
+//        TempoDateItemBinding binding = TempoDateItemBinding.bind(view);
+//        return new TempoDateViewHolder(binding);
         return new TempoDateViewHolder(view);
     }
 
@@ -50,4 +52,13 @@ class TempoDateAdapter extends RecyclerView.Adapter<TempoDateAdapter.TempoDateVi
             colorFrame = view.findViewById(R.id.color_fl);
         }
     }
+
+//    public class TempoDateViewHolder extends RecyclerView.ViewHolder {
+//        TempoDateItemBinding binding;
+//
+//        public TempoDateViewHolder(@NonNull TempoDateItemBinding binding) {
+//            super(binding.getRoot());
+//            this.binding = binding;
+//        }
+//    }
 }

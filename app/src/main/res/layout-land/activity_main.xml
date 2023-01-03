@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/white_days_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10sp"
+        android:background="@color/tempo_white_day_bg"
+        android:gravity="center"
+
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/history_bt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dayColorView2"
+        app:layout_constraintTop_toBottomOf="@+id/red_days_tv"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.example.b3tempooursel.DayColorView
+        android:id="@+id/dayColorView2"
+        android:layout_width="200dp"
+        android:layout_height="371dp"
+        app:captionColor="@color/black"
+        app:captionText="@string/dcv_tomorrow_tx"
+        app:captionTextSize="@dimen/tempo_days_left_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/blue_days_tv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dayColorView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <com.example.b3tempooursel.DayColorView
+        android:id="@+id/dayColorView"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:captionColor="@color/black"
+        app:captionText="@string/dcv_today_tx"
+        app:captionTextSize="@dimen/tempo_color_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dayColorView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <TextView
+        android:id="@+id/blue_days_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10sp"
+        android:background="@color/tempo_blue_day_bg"
+        android:gravity="center"
+        android:text="TextView"
+
+        app:layout_constraintBottom_toTopOf="@+id/red_days_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dayColorView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/red_days_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10sp"
+        android:background="@color/tempo_red_day_bg"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/white_days_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dayColorView2"
+        app:layout_constraintTop_toBottomOf="@+id/blue_days_tv"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <Button
+        android:id="@+id/history_bt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Historique"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/white_days_tv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dayColorView2"
+        app:layout_constraintStart_toStartOf="@+id/white_days_tv"
+        app:layout_constraintTop_toBottomOf="@+id/white_days_tv"
+        app:layout_constraintVertical_bias="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
