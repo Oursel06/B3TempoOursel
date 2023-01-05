@@ -8,5 +8,7 @@
     <string name="history_bt">Historique</string>
     <string name="channel_name">TempoColor</string>
     <string name="channel_description">Notifications pour les jours rouges et blancs</string>
+    <string name="notif_title">Tempo App</string>
+    <string name="notif_description">Demain jour </string>
 
 </resources>

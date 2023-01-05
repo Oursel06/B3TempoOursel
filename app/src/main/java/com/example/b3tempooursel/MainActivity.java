@@ -2,6 +2,7 @@ package com.example.b3tempooursel;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +10,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button history = findViewById(R.id.history_bt);
         history.setOnClickListener(this);
         getDayLeft();
+        getColor();
         createNotificationChannel();
+//        initAlarmManager();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDayLeft();
+        getColor();
     }
 
     @Override
@@ -63,6 +80,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    private void getColor() {
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        Call<TempoDaysColor> call2 = apiInterface.getTempoDaysColor(formatDate, IEdfApi.EDF_TEMPO_API_ALERT_TYPE);
+        call2.enqueue(new Callback<TempoDaysColor>() {
+            @Override
+            public void onResponse(Call<TempoDaysColor> call, Response<TempoDaysColor> response) {
+                TempoDaysColor resource = response.body();
+                Log.d("REPONSE", "getCouleurJourJ : " + resource.getCouleurJourJ());
+                Log.d("REPONSE", "getCouleurJourJ1 : " + resource.getCouleurJourJ1());
+                DayColorView dayColorView = findViewById(R.id.dayColorView);
+                DayColorView dayColorView2 = findViewById(R.id.dayColorView2);
+                dayColorView.setDayCircleColor(resource.getCouleurJourJ());
+                dayColorView2.setDayCircleColor(resource.getCouleurJourJ1());
+                Log.i("Oursel", "Oursel => " + resource.getCouleurJourJ1().toString());
+                checkColorForNotif(resource.getCouleurJourJ1());
+            }
+
+            @Override
+            public void onFailure(Call<TempoDaysColor> call, Throwable t) {
+                Log.e("REPONSE", "ERREUR ");
+            }
+        });
+    }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -78,9 +119,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             notificationManager.createNotificationChannel(channel);
         }
     }
-    private void checkColorForNotif(TempoColor color){
-        if(color == TempoColor.RED || color == TempoColor.WHITE){
 
+    private void checkColorForNotif(TempoColor color) {
+        if (color == TempoColor.RED || color == TempoColor.WHITE) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setContentTitle(getString(R.string.notif_title))
+                    .setContentText(getString(R.string.notif_description) + " " + color)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(1, builder.build());
         }
+    }
+
+    private void initAlarmManager() {
+        Intent intent = new Intent(this, TempoAlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 2023, intent, 0);
     }
 }
