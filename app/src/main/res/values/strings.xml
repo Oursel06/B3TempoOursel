@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">B3TempoAppOursel</string>
 
     <string name="dcv_tomorrow_tx">Demain</string>
@@ -9,6 +9,10 @@
     <string name="channel_name">TempoColor</string>
     <string name="channel_description">Notifications pour les jours rouges et blancs</string>
     <string name="notif_title">Tempo App</string>
-    <string name="notif_description">Demain jour </string>
+    <string name="notif_description">Attention, demain jour </string>
+    <string name="tempo_red_color">rouge</string>
+    <string name="tempo_white_color">blanc</string>
+    <string name="tempo_blue_color">bleu</string>
+    <string name="tempo_indefine_color"> indéfinie</string>
 
 </resources>

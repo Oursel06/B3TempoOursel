@@ -1,8 +1,10 @@
 package com.example.b3tempooursel;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -32,12 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button history = findViewById(R.id.history_bt);
         history.setOnClickListener(this);
         getDayLeft();
         getColor();
         createNotificationChannel();
-//        initAlarmManager();
+        initAlarmManager();
     }
 
     @Override
@@ -96,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.i("Oursel", "Oursel => " + resource.getCouleurJourJ1().toString());
                 checkColorForNotif(resource.getCouleurJourJ1());
             }
-
             @Override
             public void onFailure(Call<TempoDaysColor> call, Throwable t) {
                 Log.e("REPONSE", "ERREUR ");
@@ -125,10 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+            Log.i("Oursel", "COLOR NOTIF => " + color);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setContentTitle(getString(R.string.notif_title))
-                    .setContentText(getString(R.string.notif_description) + " " + color)
+                    .setContentText(getString(R.string.notif_description) + " " + getString(color.getStringResId()))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
@@ -139,6 +143,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initAlarmManager() {
         Intent intent = new Intent(this, TempoAlarmReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 2023, intent, 0);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 2023, intent, PendingIntent.FLAG_IMMUTABLE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 56);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+        // Pour voir alarm dans terminal :
+//        adb shell
+//        dumpsys alarm | grep b3tempo
     }
 }

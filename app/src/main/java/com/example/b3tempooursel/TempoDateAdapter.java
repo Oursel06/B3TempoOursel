@@ -35,7 +35,7 @@ class TempoDateAdapter extends RecyclerView.Adapter<TempoDateAdapter.TempoDateVi
     @Override
     public void onBindViewHolder(@NonNull TempoDateViewHolder holder, int position) {
         holder.dateTv.setText(tempodates.get(position).getDate());
-        holder.colorFrame.setBackgroundColor(ContextCompat.getColor(context, tempodates.get(position).getCouleur().getResId()));
+        holder.colorFrame.setBackgroundColor(ContextCompat.getColor(context, tempodates.get(position).getCouleur().getColorResId()));
     }
 
     @Override
