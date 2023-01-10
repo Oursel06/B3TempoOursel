@@ -102,9 +102,9 @@ public class HistoryActivityV2 extends Activity implements OnItemSelectedListene
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         findViewById(R.id.progress_bar_v2).setVisibility(View.VISIBLE);
         TempoDateAdapterV2 adapter = new TempoDateAdapterV2(tempoDates, this);
+        adapter.notifyDataSetChanged();
         String item = parent.getItemAtPosition(position).toString();
         getHistoryV2(adapter, item);
-        tempoDates.clear();
         Toast.makeText(parent.getContext(), "Historique de l'année " + item, Toast.LENGTH_SHORT).show();
     }
 
