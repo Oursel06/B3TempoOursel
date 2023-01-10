@@ -25,7 +25,7 @@
         android:gravity="center"
         android:text="@string/not_available"
         android:textSize="@dimen/tempo_color_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/history_bt"
+        app:layout_constraintBottom_toTopOf="@+id/linear_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/white_days_tv"
         app:layout_constraintHorizontal_bias="0.5"
@@ -44,7 +44,7 @@
         android:text="@string/not_available"
         android:textColor="@color/black"
         android:textSize="@dimen/tempo_color_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/history_bt"
+        app:layout_constraintBottom_toTopOf="@+id/linear_button"
         app:layout_constraintEnd_toStartOf="@+id/red_days_tv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/blue_days_tv"
@@ -61,25 +61,50 @@
         android:gravity="center"
         android:text="@string/not_available"
         android:textSize="@dimen/tempo_color_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/history_bt"
+        app:layout_constraintBottom_toTopOf="@+id/linear_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/white_days_tv"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <Button
-        android:id="@+id/history_bt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Historique"
+    <LinearLayout
+        android:id="@+id/linear_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/white_days_tv" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/history_bt"
+            android:layout_width="190sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:text="@string/history_v1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <Button
+            android:id="@+id/history_bt_v2"
+            android:layout_width="190sp"
+            android:layout_height="60sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:text="@string/history_v2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+    </LinearLayout>
 
     <com.example.b3tempooursel.DayColorView
         android:id="@+id/dayColorView"
@@ -93,7 +118,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/dayColorViewTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/tempo_color_text_size"
+        android:textColor="@color/black"
+        tools:text="@string/not_set_result"
+        android:layout_marginTop="-120sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayColorView"/>
 
     <com.example.b3tempooursel.DayColorView
         android:id="@+id/dayColorView2"
@@ -107,5 +145,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayColorView" />
+
+    <TextView
+        android:id="@+id/dayColorView2Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="@dimen/tempo_days_left_text_size"
+        android:textColor="@color/black"
+        tools:text="@string/not_set_result"
+        android:layout_marginTop="-120sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayColorView2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

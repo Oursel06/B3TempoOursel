@@ -5,14 +5,17 @@
     <string name="dcv_today_tx">Aujourd\'hui</string>
     <string name="not_available">ND</string>
     <string name="not_set">not set</string>
-    <string name="history_bt">Historique</string>
+    <string name="not_set_result">Indéfinie</string>
+    <string name="history_v1">HISTO V1</string>
+    <string name="history_v2">HISTO V2</string>
     <string name="channel_name">TempoColor</string>
     <string name="channel_description">Notifications pour les jours rouges et blancs</string>
     <string name="notif_title">Tempo App</string>
     <string name="notif_description">Attention, demain jour </string>
-    <string name="tempo_red_color">rouge</string>
-    <string name="tempo_white_color">blanc</string>
-    <string name="tempo_blue_color">bleu</string>
+    <string name="tempo_red_color">Rouge</string>
+    <string name="tempo_white_color">Blanc</string>
+    <string name="tempo_blue_color">Bleu</string>
     <string name="tempo_indefine_color"> indéfinie</string>
+    <string name="spinner_title">Sélectionnez une année</string>
 
 </resources>

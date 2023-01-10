@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
             // Create call to getTempoDaysLeft
             Date now = new Date();
             TempoDateAdapter adapter = new TempoDateAdapter(tempoDates, this);
-            String yearNow = getNowDate("yyyy-MM-dd").substring(0, 4);
+            String yearNow = getNowDate("yyyy");
             Integer yearBefore = Integer.valueOf(yearNow) - 1;
             Call<TempoHistory> call = apiInterface.getTempoHistory(yearBefore.toString(), yearNow);
             call.enqueue(new Callback<TempoHistory>() {

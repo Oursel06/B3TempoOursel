@@ -16,7 +16,6 @@ class TempoDateAdapter extends RecyclerView.Adapter<TempoDateAdapter.TempoDateVi
     private List<TempoDate> tempodates;
     private Context context;
 
-
     public TempoDateAdapter(List<TempoDate> tempoDates, Context context){
         this.tempodates = tempoDates;
         this.context = context;

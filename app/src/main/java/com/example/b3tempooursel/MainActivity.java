@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         Button history = findViewById(R.id.history_bt);
+        Button historyv2 = findViewById(R.id.history_bt_v2);
         history.setOnClickListener(this);
+        historyv2.setOnClickListener(this);
         getDayLeft();
         getColor();
         createNotificationChannel();
@@ -54,8 +56,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
-        intent.setClass(this, HistoryActivity.class);
-        startActivity(intent);
+        switch(v.getId()) {
+            case R.id.history_bt:
+                intent.setClass(this, HistoryActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.history_bt_v2:
+                intent.setClass(this, HistoryActivityV2.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     public void getDayLeft() {
@@ -97,8 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DayColorView dayColorView2 = findViewById(R.id.dayColorView2);
                 dayColorView.setDayCircleColor(resource.getCouleurJourJ());
                 dayColorView2.setDayCircleColor(resource.getCouleurJourJ1());
-                Log.i("Oursel", "Oursel => " + resource.getCouleurJourJ1().toString());
-                checkColorForNotif(resource.getCouleurJourJ1());
+                TextView txtresult = findViewById(R.id.dayColorViewTxt);
+                TextView txtresult2 = findViewById(R.id.dayColorView2Txt);
+                txtresult.setText(getString(resource.getCouleurJourJ().getStringResId()));
+                txtresult2.setText(getString(resource.getCouleurJourJ1().getStringResId()));
             }
             @Override
             public void onFailure(Call<TempoDaysColor> call, Throwable t) {
@@ -124,11 +137,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void checkColorForNotif(TempoColor color) {
-        if (color == TempoColor.RED || color == TempoColor.WHITE) {
+//        if (color == TempoColor.RED || color == TempoColor.WHITE || color == TempoColor.BLUE) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-            Log.i("Oursel", "COLOR NOTIF => " + color);
+            Log.i("Oursel", "COLOR NOTIF => " + getString(color.getStringResId()));
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setContentTitle(getString(R.string.notif_title))
@@ -139,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             notificationManager.notify(1, builder.build());
         }
-    }
+//    }
 
     private void initAlarmManager() {
         Intent intent = new Intent(this, TempoAlarmReceiver.class);
